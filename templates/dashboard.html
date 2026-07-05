@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>🚀 AI Support Dashboard</h2>
+            <p class="text-muted">
+                Customer Support Management System
+            </p>
+        </div>
+
+        <div>
+            <span class="badge bg-success">
+                System Online
+            </span>
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Customers -->
+
+        <div class="col-md-4">
+
+            <div class="card dashboard-card shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <h6 class="text-muted">
+                                Customers
+                            </h6>
+
+                            <h1 class="fw-bold">
+                                {{ customers }}
+                            </h1>
+                        </div>
+
+                        <div class="icon-box bg-primary">
+                            👥
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row g-4 mt-3">
+
+            <div class="col-md-4">
+
+                <div class="card shadow-sm">
+
+                    <div class="card-body">
+
+                        <h6 class="text-muted">
+                            Closed Tickets
+                        </h6>
+
+                        <h2>
+                            {{ closed_tickets }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card shadow-sm">
+
+                    <div class="card-body">
+
+                        <h6 class="text-muted">
+                            High Priority
+                        </h6>
+
+                        <h2>
+                            {{ high_priority }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card shadow-sm">
+
+                    <div class="card-body">
+
+                        <h6 class="text-muted">
+                            Today's Tickets
+                        </h6>
+
+                        <h2>
+                            {{ today_tickets }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Tickets -->
+
+        <div class="col-md-4">
+
+            <div class="card dashboard-card shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6 class="text-muted">
+                                Open Tickets
+                            </h6>
+
+                            <h1 class="fw-bold">
+                                {{ open_tickets }}
+                            </h1>
+
+                        </div>
+
+                        <div class="icon-box bg-danger">
+                            🎫
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Appointments -->
+
+        <div class="col-md-4">
+
+            <div class="card dashboard-card shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6 class="text-muted">
+                                Appointments
+                            </h6>
+
+                            <h1 class="fw-bold">
+                                {{ appointments }}
+                            </h1>
+
+                        </div>
+
+                        <div class="icon-box bg-success">
+                            📅
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card dashboard-card shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6 class="text-muted">
+                                Escalated Tickets
+                            </h6>
+
+                            <h1 class="fw-bold">
+                                {{ escalated_count }}
+                            </h1>
+
+                        </div>
+
+                        <div class="icon-box bg-warning">
+                            🚨
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+
+    <div class="row mt-5">
+
+        <div class="col-md-12">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    <h5>
+                        Quick Navigation
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <a href="/customers"
+                       class="btn btn-primary m-2">
+                        Customers
+                    </a>
+
+                    <a href="/tickets"
+                       class="btn btn-danger m-2">
+                        Tickets
+                    </a>
+
+                    <a href="/appointments"
+                       class="btn btn-success m-2">
+                        Appointments
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Recent Activity -->
+
+    <div class="row mt-4">
+
+        <div class="col-md-12">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    <h5>
+                        Recent Activity
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <ul class="list-group">
+
+                        <li class="list-group-item">
+                            New customer registered
+                        </li>
+
+                        <li class="list-group-item">
+                            Ticket created
+                        </li>
+
+                        <li class="list-group-item">
+                            Appointment booked
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card mt-4 shadow-sm">
+
+        <div class="card-header">
+            Recent Tickets
+        </div>
+
+        <div class="card-body">
+
+            <table class="table">
+
+                <tr>
+                    <th>Ticket</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                </tr>
+
+                {% for ticket in recent_tickets %}
+
+                <tr>
+
+                    <td>
+                        <a href="/ticket/{{ ticket.ticket_id }}">
+                            {{ ticket.ticket_id }}
+                        </a>
+                    </td>
+
+                    <td>
+                        {{ ticket.status }}
+                    </td>
+
+                    <td>
+                        {{ ticket.priority }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

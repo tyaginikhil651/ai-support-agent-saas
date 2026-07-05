@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Analytics Dashboard</h2>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5>Total Tickets</h5>
+                <h2>{{ total_tickets }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5>Open Tickets</h5>
+                <h2>{{ open_tickets }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5>Closed Tickets</h5>
+                <h2>{{ closed_tickets }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5>Customers</h5>
+                <h2>{{ customers }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card mt-4">
+    <div class="card-body">
+
+        <h4>Monthly Ticket Trend</h4>
+
+        <canvas id="ticketChart"></canvas>
+
+    </div>
+</div>
+
+<script>
+
+    const labels = [
+        {% for item in monthly %}
+    "{{ item.month }}",
+        {% endfor %}
+];
+
+    const values = [
+        {% for item in monthly %}
+    { { item.total } },
+    {% endfor %}
+];
+
+    new Chart(
+        document.getElementById("ticketChart"),
+        {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "Tickets",
+                        data: values
+                    }
+                ]
+            }
+        }
+    );
+
+</script>
+
+<div id="alerts"></div>
+
+<script>
+    const ws = new WebSocket("ws://localhost:8000/ws/alerts");
+
+    ws.onmessage = function (event) {
+        const div = document.getElementById("alerts");
+
+        const item = document.createElement("div");
+        item.innerText = event.data;
+
+        item.style.background = "red";
+        item.style.color = "white";
+        item.style.padding = "10px";
+        item.style.margin = "5px";
+
+        div.appendChild(item);
+    };
+</script>
+
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>🎫 Support Tickets</h1>
+    <input
+        type="text"
+        id="ticketSearch"
+        placeholder="Search ticket..."
+        class="search-box"
+    >
+</div>
+
+<div class="stats">
+    Total Tickets: {{ tickets|length }}
+</div>
+
+<table class="modern-table" id="ticketTable">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ticket ID</th>
+            <th>User</th>
+            <th>Issue</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for ticket in tickets %}
+
+        <tr>
+            <td>
+
+            <a href="/ticket/{{ ticket.ticket_id }}">
+
+                {{ ticket.ticket_id }}
+
+            </a>
+
+            </td>
+
+            <!-- <td>
+                <strong>{{ ticket.ticket_id }}</strong>
+            </td> -->
+
+            <td>{{ ticket.user_id }}</td>
+
+            <td>{{ ticket.issue }}</td>
+
+            <td>
+
+                {% if ticket.status == "Open" %}
+                    <span class="badge open">
+                        Open
+                    </span>
+
+                {% elif ticket.status == "In Progress" %}
+                    <span class="badge progress">
+                        In Progress
+                    </span>
+
+                {% else %}
+                    <span class="badge closed">
+                        Closed
+                    </span>
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+    <h4>Recent Tickets</h4>
+
+    <table class="table">
+
+    <tr>
+    <th>ID</th>
+    <th>Status</th>
+    <th>Priority</th>
+    </tr>
+
+    {% for t in recent_tickets %}
+
+    <tr>
+
+    <td>
+    <a href="/ticket/{{ t.ticket_id }}">
+    {{ t.ticket_id }}
+    </a>
+    </td>
+
+    <td>{{ t.status }}</td>
+
+    <td>{{ t.priority }}</td>
+
+    </tr>
+
+    {% endfor %}
+
+    </table>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+<script>
+
+const searchBox =
+document.getElementById("ticketSearch");
+
+searchBox.addEventListener(
+    "keyup",
+    function () {
+
+        let value =
+        this.value.toLowerCase();
+
+        let rows =
+        document.querySelectorAll(
+            "#ticketTable tbody tr"
+        );
+
+        rows.forEach(row => {
+
+            if (
+                row.innerText
+                .toLowerCase()
+                .includes(value)
+            ) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+
+        });
+    }
+);
+
+</script>
+
+{% endblock %}

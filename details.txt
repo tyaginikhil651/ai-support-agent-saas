@@ -1,0 +1,784 @@
+Below is a complete project documentation draft for your AI Support Agent.
+
+# AI Support Agent
+
+## WhatsApp + AI + Ticketing + Appointment Booking System
+
+---
+
+# 1. Project Overview
+
+The AI Support Agent is an intelligent customer support automation platform that allows customers to communicate through WhatsApp and receive instant support.
+
+The system can:
+
+* Answer customer queries
+* Create support tickets
+* Register complaints
+* Book appointments
+* Track ticket status
+* Store customer information
+* Provide AI-powered support
+* Manage all activities through an Admin Dashboard
+
+The solution combines:
+
+* WhatsApp Cloud API
+* FastAPI
+* Ollama LLM
+* SQLite Database
+* Google Calendar
+* LangGraph (future)
+* RAG Knowledge Base (future)
+
+---
+
+# 2. Problem Statement
+
+Most businesses face the following issues:
+
+### Customer Support Problems
+
+* Customers wait long times for replies
+* Support teams are overloaded
+* Complaints are not tracked properly
+* Appointments are booked manually
+* Customer information is scattered
+* Support is not available 24×7
+
+### Business Problems
+
+* High customer support costs
+* Missed appointments
+* Lost leads
+* Poor customer experience
+* No centralized dashboard
+
+---
+
+# 3. Proposed Solution
+
+Build an AI-powered customer support system that:
+
+### Automates
+
+* FAQ responses
+* Appointment booking
+* Complaint registration
+* Ticket tracking
+
+### Centralizes
+
+* Customer database
+* Complaint records
+* Appointment records
+
+### Improves
+
+* Customer satisfaction
+* Response time
+* Operational efficiency
+
+---
+
+# 4. System Architecture
+
+```text
+Customer
+    │
+    ▼
+WhatsApp
+    │
+    ▼
+Meta Cloud API
+    │
+    ▼
+Webhook (FastAPI)
+    │
+    ▼
+AI Agent Router
+    │
+ ┌──┼─────────────┬───────────┐
+ │  │             │           │
+ ▼  ▼             ▼           ▼
+
+FAQ Tool
+Complaint Tool
+Appointment Tool
+Ticket Tool
+
+    │
+    ▼
+SQLite Database
+
+    │
+    ▼
+Admin Dashboard
+
+    │
+    ▼
+Human Agent
+```
+
+---
+
+# 5. Project Components
+
+---
+
+## WhatsApp Bot
+
+Receives:
+
+```text
+Hello
+```
+
+Replies:
+
+```text
+Hello! How may I help you?
+```
+
+Uses:
+
+* Meta WhatsApp Cloud API
+* FastAPI Webhook
+
+---
+
+## AI Engine
+
+Uses:
+
+```text
+Ollama
+```
+
+Models:
+
+* Llama 3
+* Mistral
+* Gemma
+* DeepSeek
+
+Functions:
+
+* Intent detection
+* FAQ answering
+* General conversation
+
+---
+
+## Tool Router
+
+Routes messages to correct tools.
+
+Example:
+
+```text
+Book appointment tomorrow
+```
+
+↓
+
+```python
+appointment_tool()
+```
+
+Example:
+
+```text
+I have complaint regarding delivery
+```
+
+↓
+
+```python
+complaint_tool()
+```
+
+---
+
+## SQLite Database
+
+Stores:
+
+### Users
+
+```sql
+users
+```
+
+### Tickets
+
+```sql
+tickets
+```
+
+### Appointments
+
+```sql
+appointments
+```
+
+---
+
+## Admin Dashboard
+
+Built using:
+
+* FastAPI
+* Jinja2
+* HTML
+* CSS
+
+Features:
+
+### Dashboard
+
+Shows:
+
+* Total Customers
+* Total Tickets
+* Total Appointments
+
+### Customers
+
+View customer details.
+
+### Tickets
+
+Track complaints.
+
+### Appointments
+
+Track bookings.
+
+---
+
+## Google Calendar Integration
+
+Creates appointments automatically.
+
+Example:
+
+```text
+Book AC Service Tomorrow 4 PM
+```
+
+↓
+
+Creates Calendar Event
+
+↓
+
+Returns Event Link
+
+---
+
+# 6. Current Features
+
+## Working
+
+### WhatsApp Integration
+
+✔
+
+### AI Chat
+
+✔
+
+### SQLite Database
+
+✔
+
+### Ticket Tracking
+
+✔
+
+### Complaint Registration
+
+✔
+
+### Appointment Booking
+
+✔
+
+### Admin Dashboard
+
+✔
+
+### Google Calendar
+
+✔
+
+---
+
+# 7. Future Features
+
+## RAG Knowledge Base
+
+Upload:
+
+* PDFs
+* Policies
+* Manuals
+* Product Documents
+
+AI answers based on company documents.
+
+---
+
+## LangGraph Agent
+
+Instead of simple routing:
+
+```text
+User
+ ↓
+AI
+ ↓
+Tool
+```
+
+Use:
+
+```text
+User
+ ↓
+Planner
+ ↓
+Tool Selection
+ ↓
+Execution
+ ↓
+Memory
+ ↓
+Response
+```
+
+---
+
+## Voice Support
+
+Customer can speak.
+
+Use:
+
+* Whisper
+* IndicTTS
+
+---
+
+## Email Notifications
+
+Send:
+
+* Ticket Updates
+* Appointment Confirmations
+
+---
+
+## Human Handoff
+
+Escalate to support staff.
+
+---
+
+## AWS Deployment
+
+Host production server.
+
+---
+
+# 8. Folder Structure
+
+```text
+ai-support-agent/
+
+│
+├── admin_dashboard.py
+├── whatsapp.py
+├── whatsapp_service.py
+├── tool_router.py
+├── database.py
+├── ollama_client.py
+│
+├── tools/
+│   ├── appointment.py
+│   ├── complaint.py
+│   ├── faq.py
+│   └── customer.py
+│
+├── templates/
+├── static/
+│
+├── support.db
+│
+├── .env
+│
+└── requirements.txt
+```
+
+---
+
+# 9. Environment Variables
+
+Create:
+
+```env
+WHATSAPP_TOKEN=
+PHONE_NUMBER_ID=
+VERIFY_TOKEN=
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+```
+
+---
+
+# 10. Installation
+
+## Create Environment
+
+```powershell
+python -m venv venv
+```
+
+Activate:
+
+```powershell
+.\venv\Scripts\activate
+```
+
+---
+
+## Install Packages
+
+```powershell
+pip install fastapi
+pip install uvicorn
+pip install requests
+pip install python-dotenv
+pip install google-api-python-client
+pip install google-auth-oauthlib
+pip install jinja2
+```
+
+---
+
+## Install Ollama
+
+Download:
+
+[Ollama](https://ollama.com?utm_source=chatgpt.com)
+
+Install model:
+
+```powershell
+ollama pull llama3
+```
+
+Test:
+
+```powershell
+ollama run llama3
+```
+
+---
+
+# 11. Initialize Database
+
+Run:
+
+```powershell
+python database.py
+```
+
+Creates:
+
+```text
+support.db
+```
+
+---
+
+# 12. Run Admin Dashboard
+
+```powershell
+uvicorn admin_dashboard:app --reload
+```
+
+Open:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+# 13. Run WhatsApp Webhook
+
+```powershell
+uvicorn whatsapp:app --reload
+```
+
+---
+
+# 14. Expose Localhost
+
+Install:
+
+[Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/?utm_source=chatgpt.com)
+
+Run:
+
+```powershell
+cloudflared tunnel --url http://localhost:8000
+```
+
+Example:
+
+```text
+https://abc123.trycloudflare.com
+```
+
+---
+
+# 15. Configure Meta Webhook
+
+Webhook URL:
+
+```text
+https://abc123.trycloudflare.com/webhook
+```
+
+Verify Token:
+
+```text
+same as .env
+```
+
+---
+
+# 16. Testing
+
+Send:
+
+```text
+Hello
+```
+
+Expected:
+
+```text
+AI Response
+```
+
+---
+
+# 17. Common Problems & Fixes
+
+---
+
+## Problem 1
+
+### Error
+
+```text
+Authentication Error
+Code 190
+```
+
+### Cause
+
+Token expired.
+
+### Fix
+
+Generate new token from Meta.
+
+Update:
+
+```env
+WHATSAPP_TOKEN=
+```
+
+Restart server.
+
+---
+
+## Problem 2
+
+### Error
+
+```text
+Verification failed
+```
+
+### Cause
+
+Wrong verify token.
+
+### Fix
+
+Ensure:
+
+```env
+VERIFY_TOKEN=
+```
+
+Matches Meta dashboard.
+
+---
+
+## Problem 3
+
+### Error
+
+```text
+TemplateNotFound
+```
+
+### Cause
+
+Missing HTML file.
+
+### Fix
+
+Ensure:
+
+```text
+templates/
+```
+
+Contains all templates.
+
+---
+
+## Problem 4
+
+### Error
+
+```text
+Connection Refused
+```
+
+### Cause
+
+FastAPI not running.
+
+### Fix
+
+Run:
+
+```powershell
+uvicorn whatsapp:app --reload
+```
+
+---
+
+## Problem 5
+
+### Error
+
+```text
+Ollama Timeout
+```
+
+### Cause
+
+Model not running.
+
+### Fix
+
+Run:
+
+```powershell
+ollama run llama3
+```
+
+---
+
+## Problem 6
+
+### Error
+
+```text
+Ticket not found
+```
+
+### Cause
+
+Wrong Ticket ID.
+
+### Fix
+
+Verify ticket exists in database.
+
+---
+
+# 18. Production Deployment
+
+Recommended:
+
+* Ubuntu Server
+* AWS EC2
+* Nginx
+* Cloudflare
+* Docker
+* PostgreSQL
+
+Production Flow:
+
+```text
+WhatsApp
+    ↓
+Nginx
+    ↓
+FastAPI
+    ↓
+LangGraph
+    ↓
+PostgreSQL
+    ↓
+Admin Dashboard
+```
+
+---
+
+# 19. Business Applications
+
+This system can be sold to:
+
+* Hospitals
+* Clinics
+* Schools
+* Colleges
+* Coaching Institutes
+* Restaurants
+* Hotels
+* Real Estate
+* Logistics Companies
+* Repair Services
+* Home Services
+* E-commerce Stores
+
+---
+
+# 20. Final Goal
+
+Transform this project into a complete AI Customer Support Platform with:
+
+* WhatsApp Agent
+* Voice Agent
+* Ticketing System
+* CRM
+* Appointment Management
+* Knowledge Base
+* Human Escalation
+* Analytics Dashboard
+* AWS Production Deployment
+
+This becomes a SaaS product that you can deploy for multiple clients and sell as a recurring subscription service rather than a one-time project.

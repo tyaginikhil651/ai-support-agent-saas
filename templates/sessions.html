@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Active Sessions</h2>
+
+<table class="table">
+
+    <tr>
+        <th>User</th>
+        <th>Flow</th>
+        <th>Step</th>
+        <th>Data</th>
+    </tr>
+
+    {% for s in sessions %}
+
+    <tr>
+        <td>{{ s.user_id }}</td>
+        <td>{{ s.flow }}</td>
+        <td>{{ s.step }}</td>
+        <td>{{ s.data }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

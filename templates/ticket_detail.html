@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2>Ticket Details</h2>
+
+    <hr>
+
+    <p>
+        <b>Ticket ID:</b>
+        {{ ticket.ticket_id }}
+    </p>
+
+    <p>
+        <b>Issue:</b>
+        {{ ticket.issue }}
+    </p>
+
+    <p>
+        <b>Status:</b>
+        {{ ticket.status }}
+    </p>
+
+    <p>
+        <b>Priority:</b>
+        {{ ticket.priority }}
+    </p>
+
+    <p>
+        <b>Assigned To:</b>
+        {{ ticket.assigned_to }}
+    </p>
+
+    <hr>
+
+    <h3>Conversation</h3>
+
+    {% for reply in replies %}
+
+    <div class="card mb-2">
+
+        <div class="card-body">
+
+            <b>{{ reply.sender }}</b>
+
+            <hr>
+
+            {{ reply.message }}
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+    <h3>Reply to Customer</h3>
+
+    <form method="post" action="/reply">
+
+        <input type="hidden" name="ticket_id" value="{{ ticket.ticket_id }}">
+
+        <textarea name="message" class="form-control" rows="5"></textarea>
+
+        <br>
+
+        <button class="btn btn-primary" type="submit">
+            Send Reply
+        </button>
+
+    </form>
+
+    <hr>
+
+    <h3>Send Reply to Customer</h3>
+
+    <form method="POST" action="/reply">
+
+        <input type="hidden" name="ticket_id" value="{{ ticket.ticket_id }}">
+
+        <textarea name="message" rows="5" placeholder="Write your reply to the customer..." required></textarea>
+
+        <br><br>
+
+        <button type="submit">
+            Send Reply
+        </button>
+
+    </form>
+
+    <hr>
+
+    <h3>Conversation History</h3>
+
+    {% if replies %}
+    {% for reply in replies %}
+    <div style="margin-bottom: 15px;">
+        <strong>{{ reply.sender }}</strong>
+        <small>{{ reply.created_at }}</small>
+
+        <p>{{ reply.message }}</p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>No replies yet.</p>
+    {% endif %}
+    <hr>
+
+
+    <form method="post" action="/ticket/update">
+
+        <input type="hidden" name="ticket_id" value="{{ ticket.ticket_id }}">
+
+        <label>Status</label>
+
+        <select name="status" class="form-control">
+
+            <option>Open</option>
+
+            <option>In Progress</option>
+
+            <option>Resolved</option>
+
+            <option>Closed</option>
+
+        </select>
+
+        <br>
+
+        <label>Priority</label>
+
+        <select name="priority" class="form-control">
+
+            <option>Low</option>
+
+            <option>Medium</option>
+
+            <option>High</option>
+
+            <option>Critical</option>
+
+        </select>
+
+        <br>
+
+        <label>Assigned To</label>
+
+        <input type="text" name="assigned_to" class="form-control">
+
+        <br>
+
+        <button class="btn btn-success">
+            Update Ticket
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

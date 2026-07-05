@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Escalated Tickets</h2>
+
+<table class="table">
+
+    <tr>
+        <th>Ticket</th>
+        <th>Status</th>
+        <th>Agent</th>
+    </tr>
+
+    {% for ticket in tickets %}
+
+    <tr>
+
+        <td>{{ ticket.ticket_id }}</td>
+
+        <td>{{ ticket.status }}</td>
+
+        <td>{{ ticket.assigned_to }}</td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

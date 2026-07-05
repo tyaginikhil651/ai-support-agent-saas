@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+
+<div>
+    <h2>👥 Customers</h2>
+    <p class="text-muted">
+        Manage all registered customers
+    </p>
+</div>
+
+<div class="customer-count">
+    {{ users|length }} Customers
+</div>
+
+</div>
+
+<div class="card shadow-sm">
+
+<div class="card-body">
+
+    <div class="toolbar">
+
+        <input
+            type="text"
+            id="searchInput"
+            class="search-box"
+            placeholder="🔍 Search customer..."
+            onkeyup="searchTable()"
+        >
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table
+            class="modern-table"
+            id="customerTable"
+        >
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Telegram ID</th>
+                    <th>Username</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for user in users %}
+
+                <tr>
+
+                    <td>
+                        {{ user.id }}
+                    </td>
+
+                    <td class="userid">
+                        {{ user.telegram_id }}
+                    </td>
+
+                    <td>
+                        {{ user.username }}
+                    </td>
+
+                    <td>
+                        <span class="badge-active">
+                            Active
+                        </span>
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</div>
+
+<script>
+
+function searchTable() {
+
+    let input =
+        document.getElementById(
+            "searchInput"
+        );
+
+    let filter =
+        input.value.toLowerCase();
+
+    let table =
+        document.getElementById(
+            "customerTable"
+        );
+
+    let rows =
+        table.getElementsByTagName(
+            "tr"
+        );
+
+    for (
+        let i = 1;
+        i < rows.length;
+        i++
+    ) {
+
+        let text =
+            rows[i]
+            .innerText
+            .toLowerCase();
+
+        rows[i].style.display =
+            text.includes(filter)
+            ? ""
+            : "none";
+    }
+}
+
+</script>
+
+{% endblock %}
