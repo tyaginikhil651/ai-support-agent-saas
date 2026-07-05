@@ -118,8 +118,6 @@ Each customer profile stores:
 
 # Dashboard
 
-Replace with your screenshots.
-
 ```markdown
 ![Dashboard](images/dashboard.png)
 ```
